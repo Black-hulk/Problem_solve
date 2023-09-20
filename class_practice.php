@@ -1,7 +1,9 @@
 <?php
 class bankAccount{
     private $balance;
-
+    public function __construct($balance){
+        $this->balance=$balance;
+    }
     public function getBalance(){
        return $this->balance;
     }
@@ -16,7 +18,8 @@ class bankAccount{
 
 class SavingAccount extends bankAccount{
     private $interestRate;
-    public function setInterestRate($interestRate){
+    public function __construct($balance,$interestRate){
+        Parent::__construct($balance);
         $this-> interestRate=$interestRate;
     }
     public function addInterest(){
@@ -27,9 +30,7 @@ class SavingAccount extends bankAccount{
         return $interest;
     }
 }
-$n=new SavingAccount();
-echo $n->deposit(200);
-echo $n->setInterestRate(0.05). '<br>';
-echo $n->addInterest().'<br>';
-echo $n->getBalance();
+$b=new SavingAccount(500,0.05);
+$b->addInterest();
+echo $b->getBalance();
 ?>
